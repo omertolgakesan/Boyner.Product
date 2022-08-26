@@ -1,0 +1,11 @@
+version: "3.9"
+services:
+    db:
+        image: "mcr.microsoft.com/mssql/server:2019-latest"
+        environment:
+            SA_PASSWORD: "yourStrong(!)Password"
+            ACCEPT_EULA: "Y"
+            MSSQL_PID: "Express"
+            Port: 1433:1433
+        ports:
+            1433/tcp: "localhost:1433"
