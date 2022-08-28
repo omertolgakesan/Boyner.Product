@@ -16,12 +16,10 @@ namespace Boyner.Product.Application.Products.Queries.GetProducts
     {
         private readonly IReadRepository<Domain.AggregatesModel.ProductAggregate.Product> _productRepository;
         private readonly IMapper _mapper;
-        private readonly ILogger<GetProductsQueryHandler> _logger;
-        public GetProductsQueryHandler(IReadRepository<Domain.AggregatesModel.ProductAggregate.Product> productRepository, IMapper mapper, ILogger<GetProductsQueryHandler> logger)
+        public GetProductsQueryHandler(IReadRepository<Domain.AggregatesModel.ProductAggregate.Product> productRepository, IMapper mapper)
         {
             _productRepository = productRepository ?? throw new ArgumentNullException(nameof(productRepository));
             _mapper = mapper;
-            _logger = logger;
         }
 
         public async Task<IResponseWrapper<IEnumerable<ProductDto>>> Handle(GetProductsQuery request, CancellationToken cancellationToken)

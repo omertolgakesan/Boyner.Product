@@ -14,9 +14,10 @@ namespace Boyner.Product.Domain.Test.ProductAggregate
         public void name_should_not_be_null()
         {
             var category = SetTestCategory();
+            var currency = SetTestCurrency();
             try
             {
-                var product = new AggregatesModel.ProductAggregate.Product(Guid.NewGuid(), "", 10, category);
+                var product = new AggregatesModel.ProductAggregate.Product(Guid.NewGuid(), "", 10, category, currency);
             }
             catch (Exception ex)
             {
@@ -28,9 +29,10 @@ namespace Boyner.Product.Domain.Test.ProductAggregate
         public void id_should_not_be_empty()
         {
             var category = SetTestCategory();
+            var currency = SetTestCurrency();
             try
             {
-                var product = new AggregatesModel.ProductAggregate.Product(Guid.Empty, "Test Name", 10, category);
+                var product = new AggregatesModel.ProductAggregate.Product(Guid.Empty, "Test Name", 10, category, currency);
             }
             catch (Exception ex)
             {
@@ -42,9 +44,10 @@ namespace Boyner.Product.Domain.Test.ProductAggregate
         public void price_should_not_be_negative_or_Zero()
         {
             var category = SetTestCategory();
+            var currency = SetTestCurrency();
             try
             {
-                var product = new AggregatesModel.ProductAggregate.Product(Guid.NewGuid(), "Test Name", 0, category);
+                var product = new AggregatesModel.ProductAggregate.Product(Guid.NewGuid(), "Test Name", 0, category, currency);
             }
             catch (Exception ex)
             {
@@ -56,11 +59,12 @@ namespace Boyner.Product.Domain.Test.ProductAggregate
         public void product_create_should_be_success()
         {
             var category = SetTestCategory();
+            var currency = SetTestCurrency();
             var productName = "Test Name";
             decimal price = 1;
             Guid productId = Guid.NewGuid();
 
-            var product = new AggregatesModel.ProductAggregate.Product(productId, productName, price, category);
+            var product = new AggregatesModel.ProductAggregate.Product(productId, productName, price, category, currency);
             Assert.NotNull(product);
             Assert.Equal(price, product.Price);
             Assert.Equal(category, product.Category);
@@ -71,19 +75,39 @@ namespace Boyner.Product.Domain.Test.ProductAggregate
         [Fact]
         public void category_should_not_be_null()
         {
+            var currency = SetTestCurrency();
             try
             {
-                var product = new AggregatesModel.ProductAggregate.Product(Guid.NewGuid(), "Test Name", 1, null);
+                var product = new AggregatesModel.ProductAggregate.Product(Guid.NewGuid(), "Test Name", 1, null, currency);
             }
             catch (Exception ex)
             {
-                Assert.Equal("Value cannot be null. (Parameter 'category')", ex.InnerException.Message);
+                Assert.Equal("Value cannot be null. (Parameter 'category')", ex.InnerException?.Message);
+            }
+        }
+
+        [Fact]
+        public void currency_should_not_be_null()
+        {
+            var category = SetTestCategory();
+            try
+            {
+                var product = new AggregatesModel.ProductAggregate.Product(Guid.NewGuid(), "Test Name", 1, category, null);
+            }
+            catch (Exception ex)
+            {
+                Assert.Equal("Value cannot be null. (Parameter 'currency')", ex.InnerException?.Message);
             }
         }
 
         private AggregatesModel.CategoryAggregate.Category SetTestCategory()
         {
             return new AggregatesModel.CategoryAggregate.Category(Guid.NewGuid(), "Test Category");
+        }
+
+        private AggregatesModel.ProductAggregate.Currency SetTestCurrency()
+        {
+            return new AggregatesModel.ProductAggregate.Currency("Turkish Lira", "TL");
         }
     }
 }

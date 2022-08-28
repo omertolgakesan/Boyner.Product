@@ -8,13 +8,13 @@ using System.Threading.Tasks;
 
 namespace Boyner.Product.Domain.AggregatesModel.AttributeAggregate
 {
-    public class AttributeValue : Entity
+    public class AttributeValue : Entity, IAggregateRoot
     {
         public string Name { get; set; }
         public Guid AttributeId { get; set; }
         public Attribute Attribute { get; set; }
 
-        protected AttributeValue(){}
+        protected AttributeValue() { }
 
         public AttributeValue(Guid id, string name, Attribute attribute)
         {

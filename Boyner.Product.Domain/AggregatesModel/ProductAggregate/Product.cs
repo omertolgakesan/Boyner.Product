@@ -1,4 +1,5 @@
-﻿using Boyner.Product.Domain.AggregatesModel.CategoryAggregate;
+﻿using Boyner.Product.Domain.AggregatesModel.AttributeAggregate;
+using Boyner.Product.Domain.AggregatesModel.CategoryAggregate;
 using Boyner.Product.Domain.Events;
 using Boyner.Product.Domain.SharedKernel.SeedWork;
 using Boyner.Product.Domain.SharedKernel.Utils;
@@ -25,11 +26,12 @@ namespace Boyner.Product.Domain.AggregatesModel.ProductAggregate
 
         protected Product() { }
 
-        public Product(Guid id, string name, decimal price, Category category)
+        public Product(Guid id, string name, decimal price, Category category,Currency currency)
         {
             Check.HasValue(id, nameof(id));
             Check.NotNullOrEmpty(name, nameof(name));
             Check.NotNull(category, nameof(category));
+            Check.NotNull(currency, nameof(currency));
             Check.Positive<decimal>(price, nameof(price));
 
             this.Id = id;
@@ -38,8 +40,16 @@ namespace Boyner.Product.Domain.AggregatesModel.ProductAggregate
             this.Category = category;
             this.Price = price;
             this.StatusId = ProductStatus.Active.Id;
+            this.CurrencyId = currency.Id;
 
             this.CreatedOn = DateTime.Now;
+
+            this.ProductAttributes = new HashSet<ProductAttribute>();
+        }
+
+        public void AddAttributeValue(AttributeAggregate.Attribute attribute, AttributeValue attributeValue)
+        {
+            this.ProductAttributes.Add(new ProductAttribute(this, attribute, attributeValue));
         }
 
         public void Update(string name, Category category, decimal price)

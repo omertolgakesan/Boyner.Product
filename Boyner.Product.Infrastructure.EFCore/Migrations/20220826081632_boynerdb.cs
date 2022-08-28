@@ -285,6 +285,12 @@ namespace Boyner.Product.Infrastructure.EFCore.Migrations
             columns: new[] { "Id", "Name" },
             values: new object[] { 2, "Passive" }
             );
+
+            migrationBuilder.InsertData(
+            table: "Currency",
+            columns: new[] { "Id", "Name", "CurrencyCode", "CreatedOn", "DeletedOn", "UpdatedOn" },
+            values: new object[] { Guid.NewGuid(), "Turkish Lira", "TL", DateTime.Now, null, null }
+            );
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

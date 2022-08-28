@@ -7,26 +7,26 @@ using System.Threading.Tasks;
 
 namespace Boyner.Product.Domain.AggregatesModel.AttributeAggregate.Specifications
 {
-    public class AttributeSpecification : Specification<Attribute>, ISingleResultSpecification
+    public class AttributeValueSpecification : Specification<AttributeValue>, ISingleResultSpecification
     {
-        public AttributeSpecification()
+        public AttributeValueSpecification()
         {
             Query.Where(x => x.DeletedOn == null);
-            Query.Include(x => x.AttributeValues);
+            Query.Include(x => x.Attribute);
         }
 
-        public AttributeSpecification(Guid id)
+        public AttributeValueSpecification(Guid id)
         {
             Query.Where(x => x.Id == id);
             Query.Where(x => x.DeletedOn == null);
-            Query.Include(x => x.AttributeValues);
+            Query.Include(x => x.Attribute);
         }
 
-        public AttributeSpecification(List<Guid> ids)
+        public AttributeValueSpecification(List<Guid> ids)
         {
             Query.Where(x => ids.Contains(x.Id));
             Query.Where(x => x.DeletedOn == null);
-            Query.Include(x => x.AttributeValues);
+            Query.Include(x => x.Attribute);
         }
     }
 }
