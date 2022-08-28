@@ -91,8 +91,8 @@ namespace Boyner.Product.Infrastructure.EFCore.Migrations
                         .HasMaxLength(250)
                         .HasColumnType("character varying(250)");
 
-                    b.Property<short>("StatusId")
-                        .HasColumnType("smallint");
+                    b.Property<int>("StatusId")
+                        .HasColumnType("int");
 
                     b.Property<DateTime?>("UpdatedOn")
                         .HasColumnType("datetime2");
@@ -202,8 +202,8 @@ namespace Boyner.Product.Infrastructure.EFCore.Migrations
                     b.Property<decimal>("Price")
                         .HasColumnType("money");
 
-                    b.Property<short>("StatusId")
-                        .HasColumnType("smallint");
+                    b.Property<int>("StatusId")
+                        .HasColumnType("int");
 
                     b.Property<DateTime?>("UpdatedOn")
                         .HasColumnType("datetime2");

@@ -9,10 +9,17 @@ namespace Boyner.Product.Domain.AggregatesModel.AttributeAggregate.Specification
 {
     public class AttributeSpecification : Specification<Attribute>, ISingleResultSpecification
     {
+        public AttributeSpecification()
+        {
+            Query.Where(x => x.DeletedOn == null);
+            Query.Include(x => x.AttributeValues);
+        }
+
         public AttributeSpecification(Guid id)
         {
             Query.Where(x => x.Id == id);
             Query.Where(x => x.DeletedOn == null);
+            Query.Include(x => x.AttributeValues);
         }
 
         public AttributeSpecification(List<Guid> ids)

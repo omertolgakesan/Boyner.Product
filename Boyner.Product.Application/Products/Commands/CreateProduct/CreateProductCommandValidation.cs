@@ -15,22 +15,5 @@ namespace Boyner.Product.Application.Products.Commands.CreateProduct
 
             logger.LogInformation("----- {ClassName} validation rules assigned", GetType().Name);
         }
-
-        private bool ProductStatusInRange(int id)
-        {
-            try
-            {
-                ProductStatus status = ProductStatus.FromValue<ProductStatus>(id);
-
-                if (status == null)
-                    return false;
-
-                return true;
-            }
-            catch (System.Exception)
-            {
-                return false;
-            }
-        }
     }
 }

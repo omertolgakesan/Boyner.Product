@@ -12,11 +12,11 @@ namespace Boyner.Product.Infrastructure.EFCore.EntityConfigurations
 
             categoryBuilder.HasKey(c => c.Id); //PK
 
-            categoryBuilder.Property(c => c.Id).HasColumnType("UUID").ValueGeneratedNever().IsRequired();
+            categoryBuilder.Property(c => c.Id).HasColumnType("uniqueidentifier").ValueGeneratedNever().IsRequired();
 
             categoryBuilder.Property(c => c.Name).HasColumnType("character varying").IsRequired().HasMaxLength(250);
 
-            categoryBuilder.Property(c => c.StatusId).HasColumnType("smallint");
+            categoryBuilder.Property(c => c.StatusId).HasColumnType("int");
             categoryBuilder.HasOne(c => c.CategoryStatus).WithMany().HasForeignKey(fk => fk.StatusId);
 
             categoryBuilder.Property(c => c.CreatedOn).IsRequired();

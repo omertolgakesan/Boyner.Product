@@ -6,11 +6,14 @@ namespace Boyner.Product.Domain.AggregatesModel.CategoryAggregate.Specifications
 {
     public class CategorySpecification : Specification<Category>, ISingleResultSpecification
     {
-        public CategorySpecification(Guid id)
+        public CategorySpecification(Guid id,bool includeRelations = false)
         {
-            Query.Where(p => p.Id == id);
+            Query.Where(p => p.Id == id && p.DeletedOn == null);
 
-            Query.Include(x => x.Products).Include(x => x.CategoryAtrributes).ThenInclude(x => x.Attribute).Include(x => x.CategoryAtrributes).ThenInclude(x => x.Attribute.AttributeValues);
+            if (includeRelations)
+            {
+                Query.Include(x => x.Products).Include(x => x.CategoryAtrributes).ThenInclude(x => x.Attribute).Include(x => x.CategoryAtrributes).ThenInclude(x => x.Attribute.AttributeValues);
+            }
         }
 
         public CategorySpecification()

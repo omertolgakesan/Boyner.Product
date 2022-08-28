@@ -1,4 +1,5 @@
 ﻿using Boyner.Product.Application.Categories.Commands;
+using Boyner.Product.Application.Categories.Commands.DeleteCategory;
 using Boyner.Product.Application.Categories.Queries.GetCategories;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -55,15 +56,18 @@ namespace Boyner.Product.API.Controllers
 
         // PUT api/<CategoryController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public async Task<IActionResult> Put(Guid id, [FromBody] UpdateCategoryCommand updateCategoryCommand, CancellationToken cancellationToken = default)
         {
+            updateCategoryCommand.Id = id;
+            return Ok(await _mediator.Send(updateCategoryCommand, cancellationToken));
         }
 
         // DELETE api/<CategoryController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public async Task<IActionResult> Delete(Guid id, CancellationToken cancellationToken = default)
         {
-
+            var deleteCategoryCommand = new DeleteCategoryCommand { Id = id };
+            return Ok(await _mediator.Send(deleteCategoryCommand, cancellationToken));
         }
     }
 }

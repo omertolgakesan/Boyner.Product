@@ -6,11 +6,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Boyner.Product.Application.Categories.Commands
+namespace Boyner.Product.Application.Attributes.Queries.GetAttributes
 {
-    public class UpdateCategoryCommand : IRequest<IResponseWrapper<bool>>
+    public class GetAttributeQuery : IRequest<IResponseWrapper<List<AttributeDto>>>
     {
         public Guid Id { get; set; }
-        public string Name { get; set; }
     }
 }

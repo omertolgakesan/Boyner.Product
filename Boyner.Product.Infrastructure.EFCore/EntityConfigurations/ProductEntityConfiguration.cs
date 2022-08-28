@@ -12,7 +12,7 @@ namespace Boyner.Product.Infrastructure.EFCore.EntityConfigurations
 
             productBuilder.HasKey(p => p.Id); //PK
 
-            productBuilder.Property(p => p.Id).HasColumnType("UUID").ValueGeneratedNever().IsRequired();
+            productBuilder.Property(p => p.Id).HasColumnType("uniqueidentifier").ValueGeneratedNever().IsRequired();
 
             productBuilder.Property(p => p.Name).HasColumnType("character varying").IsRequired().HasMaxLength(250);
 
@@ -22,7 +22,7 @@ namespace Boyner.Product.Infrastructure.EFCore.EntityConfigurations
 
             productBuilder.Property(p => p.Price).HasColumnType("money");
 
-            productBuilder.Property(p => p.StatusId).HasColumnType("smallint");
+            productBuilder.Property(p => p.StatusId).HasColumnType("int");
             productBuilder.HasOne(c => c.Status).WithMany().HasForeignKey(fk => fk.StatusId);
 
             productBuilder.Property(p => p.CreatedOn).IsRequired();

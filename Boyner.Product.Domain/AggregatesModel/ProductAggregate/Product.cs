@@ -41,6 +41,17 @@ namespace Boyner.Product.Domain.AggregatesModel.ProductAggregate
             this.CreatedOn = DateTime.Now;
         }
 
+        public void Update(string name, Category category, decimal price)
+        {
+            Check.NotNull(category, nameof(category));
+            Check.Positive(price, nameof(price));
+            Check.NotNullOrEmpty(name, nameof(name));
+
+            this.Price = price;
+            this.Name = name.Trim();
+            this.CategoryId = category.Id;
+        }
+
         public void UpdatePrice(decimal price)
         {
             Check.Positive(price, nameof(price));

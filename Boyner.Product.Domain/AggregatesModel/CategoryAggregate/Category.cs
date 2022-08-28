@@ -30,6 +30,18 @@ namespace Boyner.Product.Domain.AggregatesModel.CategoryAggregate
 
         }
 
+        public void Delete()
+        {
+            this.DeletedOn = DateTime.Now;
+        }
+
+        public void UpdateName(string name)
+        {
+            Check.NotNullOrEmpty(name, nameof(name));
+            this.Name = name;
+            this.UpdatedOn = DateTime.Now;
+        }
+
         public void AddCategoryAttribute(CategoryAttribute categoryAttribute)
         {
             this.CategoryAtrributes.Add(categoryAttribute);

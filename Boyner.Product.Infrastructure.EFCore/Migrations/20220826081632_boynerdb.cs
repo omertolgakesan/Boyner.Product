@@ -261,6 +261,30 @@ namespace Boyner.Product.Infrastructure.EFCore.Migrations
                 name: "IX_ProductAttribute_ProductId",
                 table: "ProductAttribute",
                 column: "ProductId");
+
+            migrationBuilder.InsertData(
+                table: "CategoryStatus",
+                columns: new[] { "Id", "Name" },
+                values: new object[] { 1, "Active" }
+                );
+
+            migrationBuilder.InsertData(
+            table: "CategoryStatus",
+            columns: new[] { "Id", "Name" },
+            values: new object[] { 2, "Passive" }
+            );
+
+            migrationBuilder.InsertData(
+               table: "ProductStatus",
+               columns: new[] { "Id", "Name" },
+               values: new object[] { 1, "Active" }
+               );
+
+            migrationBuilder.InsertData(
+            table: "ProductStatus",
+            columns: new[] { "Id", "Name" },
+            values: new object[] { 2, "Passive" }
+            );
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

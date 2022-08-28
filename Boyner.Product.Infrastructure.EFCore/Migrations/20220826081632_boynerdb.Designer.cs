@@ -80,7 +80,7 @@ namespace Boyner.Product.Infrastructure.EFCore.Migrations
             modelBuilder.Entity("Boyner.Product.Domain.AggregatesModel.CategoryAggregate.Category", b =>
                 {
                     b.Property<Guid>("Id")
-                        .HasColumnType("UUID");
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
@@ -93,8 +93,8 @@ namespace Boyner.Product.Infrastructure.EFCore.Migrations
                         .HasMaxLength(250)
                         .HasColumnType("character varying(250)");
 
-                    b.Property<short>("StatusId")
-                        .HasColumnType("smallint");
+                    b.Property<int>("StatusId")
+                        .HasColumnType("int");
 
                     b.Property<DateTime?>("UpdatedOn")
                         .HasColumnType("datetime2");
@@ -116,7 +116,7 @@ namespace Boyner.Product.Infrastructure.EFCore.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("CategoryId")
-                        .HasColumnType("UUID");
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
@@ -182,10 +182,10 @@ namespace Boyner.Product.Infrastructure.EFCore.Migrations
             modelBuilder.Entity("Boyner.Product.Domain.AggregatesModel.ProductAggregate.Product", b =>
                 {
                     b.Property<Guid>("Id")
-                        .HasColumnType("UUID");
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("CategoryId")
-                        .HasColumnType("UUID");
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
@@ -204,8 +204,8 @@ namespace Boyner.Product.Infrastructure.EFCore.Migrations
                     b.Property<decimal>("Price")
                         .HasColumnType("money");
 
-                    b.Property<short>("StatusId")
-                        .HasColumnType("smallint");
+                    b.Property<int>("StatusId")
+                        .HasColumnType("int");
 
                     b.Property<DateTime?>("UpdatedOn")
                         .HasColumnType("datetime2");
@@ -240,7 +240,7 @@ namespace Boyner.Product.Infrastructure.EFCore.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<Guid>("ProductId")
-                        .HasColumnType("UUID");
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime?>("UpdatedOn")
                         .HasColumnType("datetime2");

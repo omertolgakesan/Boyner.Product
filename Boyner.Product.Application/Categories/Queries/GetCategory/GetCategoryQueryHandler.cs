@@ -23,7 +23,7 @@ namespace Boyner.Product.Application.Categories.Queries.GetCategories
         }
         public async Task<IResponseWrapper<CategoryDto>> Handle(GetCategoryQuery request, CancellationToken cancellationToken)
         {
-            var categorySpec = new CategorySpecification(request.CategoryId);
+            var categorySpec = new CategorySpecification(request.CategoryId,true);
             var category = await _categoryRepository.GetBySpecAsync(categorySpec, cancellationToken);
 
             if (category == null)
