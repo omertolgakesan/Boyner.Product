@@ -17,7 +17,7 @@ namespace Boyner.Product.Domain.Test.ProductAggregate
             var currency = SetTestCurrency();
             try
             {
-                var product = new AggregatesModel.ProductAggregate.Product(Guid.NewGuid(), "", 10, category, currency);
+                var product = new AggregatesModel.ProductAggregate.Product(Guid.NewGuid(), "", 10, category.Id, currency.Id);
             }
             catch (Exception ex)
             {
@@ -32,7 +32,7 @@ namespace Boyner.Product.Domain.Test.ProductAggregate
             var currency = SetTestCurrency();
             try
             {
-                var product = new AggregatesModel.ProductAggregate.Product(Guid.Empty, "Test Name", 10, category, currency);
+                var product = new AggregatesModel.ProductAggregate.Product(Guid.Empty, "Test Name", 10, category.Id, currency.Id);
             }
             catch (Exception ex)
             {
@@ -47,7 +47,7 @@ namespace Boyner.Product.Domain.Test.ProductAggregate
             var currency = SetTestCurrency();
             try
             {
-                var product = new AggregatesModel.ProductAggregate.Product(Guid.NewGuid(), "Test Name", 0, category, currency);
+                var product = new AggregatesModel.ProductAggregate.Product(Guid.NewGuid(), "Test Name", 0, category.Id, currency.Id);
             }
             catch (Exception ex)
             {
@@ -64,7 +64,7 @@ namespace Boyner.Product.Domain.Test.ProductAggregate
             decimal price = 1;
             Guid productId = Guid.NewGuid();
 
-            var product = new AggregatesModel.ProductAggregate.Product(productId, productName, price, category, currency);
+            var product = new AggregatesModel.ProductAggregate.Product(productId, productName, price, category.Id, currency.Id);
             Assert.NotNull(product);
             Assert.Equal(price, product.Price);
             Assert.Equal(category, product.Category);
@@ -78,7 +78,7 @@ namespace Boyner.Product.Domain.Test.ProductAggregate
             var currency = SetTestCurrency();
             try
             {
-                var product = new AggregatesModel.ProductAggregate.Product(Guid.NewGuid(), "Test Name", 1, null, currency);
+                var product = new AggregatesModel.ProductAggregate.Product(Guid.NewGuid(), "Test Name", 1, Guid.Empty, currency.Id);
             }
             catch (Exception ex)
             {
@@ -92,7 +92,7 @@ namespace Boyner.Product.Domain.Test.ProductAggregate
             var category = SetTestCategory();
             try
             {
-                var product = new AggregatesModel.ProductAggregate.Product(Guid.NewGuid(), "Test Name", 1, category, null);
+                var product = new AggregatesModel.ProductAggregate.Product(Guid.NewGuid(), "Test Name", 1, category.Id, Guid.Empty);
             }
             catch (Exception ex)
             {
@@ -107,7 +107,7 @@ namespace Boyner.Product.Domain.Test.ProductAggregate
 
         private AggregatesModel.ProductAggregate.Currency SetTestCurrency()
         {
-            return new AggregatesModel.ProductAggregate.Currency("Turkish Lira", "TL");
+            return new AggregatesModel.ProductAggregate.Currency(Guid.NewGuid(), "Turkish Lira", "TL");
         }
     }
 }

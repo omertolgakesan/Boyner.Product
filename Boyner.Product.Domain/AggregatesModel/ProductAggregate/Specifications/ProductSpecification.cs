@@ -33,7 +33,7 @@ namespace Boyner.Product.Domain.AggregatesModel.ProductAggregate.Specifications
             if (categoryName != null)
                 Query.Include(x => x.Category).Where(p => p.Category.Name == categoryName);
             Query.Where(p => p.StatusId == ProductStatus.Active.Id);
-            Query.Include(x => x.Category).Include(x => x.Currency).Include(x => x.ProductAttributes).ThenInclude(x => x.Attribute).Include(x => x.ProductAttributes).ThenInclude(x => x.AttributeValue);
+            Query.Include(x => x.Category).Include(x => x.Currency).Include(x => x.ProductAttributes).ThenInclude(x => x.AttributeValue).ThenInclude(x=>x.Attribute);
         }
     }
 }

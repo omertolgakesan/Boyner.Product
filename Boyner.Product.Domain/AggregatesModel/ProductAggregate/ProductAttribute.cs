@@ -13,23 +13,22 @@ namespace Boyner.Product.Domain.AggregatesModel.ProductAggregate
     {
         public Product Product { get; private set; }
         public Guid ProductId { get; private set; }
-        public AttributeAggregate.Attribute Attribute { get; private set; }
-        public Guid AttributeId { get; private set; }
+
         public AttributeValue AttributeValue { get; private set; }
         public Guid AttributeValueId { get; set; }
 
-        protected ProductAttribute(){}
+        protected ProductAttribute() { }
 
 
-        public ProductAttribute(Product product, AttributeAggregate.Attribute attribute, AttributeValue attributeValue)
+        public ProductAttribute(Guid id,Guid productId, Guid attributeValueId)
         {
-            Check.NotNull(product, nameof(product));
-            Check.NotNull(attribute, nameof(attribute));
-            Check.NotNull(attributeValue, nameof(attributeValue));
+            Check.HasValue(id, nameof(id));
+            Check.HasValue(productId, nameof(productId));
+            Check.HasValue(attributeValueId, nameof(attributeValueId));
 
-            this.ProductId = product.Id;
-            this.AttributeId = attribute.Id;
-            this.AttributeValueId = attributeValue.Id;
+            this.Id = id;
+            this.ProductId = productId;
+            this.AttributeValueId = attributeValueId;
             this.CreatedOn = DateTime.Now;
         }
     }

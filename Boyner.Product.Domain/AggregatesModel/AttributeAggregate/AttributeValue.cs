@@ -16,16 +16,15 @@ namespace Boyner.Product.Domain.AggregatesModel.AttributeAggregate
 
         protected AttributeValue() { }
 
-        public AttributeValue(Guid id, string name, Attribute attribute)
+        public AttributeValue(Guid id, string name, Guid attributeId)
         {
             Check.HasValue(id, nameof(id));
             Check.NotNullOrEmpty(name, nameof(name));
-            Check.NotNull(attribute, nameof(attribute));
+            Check.HasValue(attributeId, nameof(attributeId));
 
             this.Id = id;
             this.Name = name;
-            this.Attribute = attribute;
-            this.AttributeId = attribute.Id;
+            this.AttributeId = attributeId;
         }
 
         internal void DeleteAttributeValue()

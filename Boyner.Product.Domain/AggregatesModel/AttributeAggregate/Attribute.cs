@@ -13,7 +13,7 @@ namespace Boyner.Product.Domain.AggregatesModel.AttributeAggregate
         public string Name { get; private set; }
         public virtual ICollection<AttributeValue> AttributeValues { get; private set; }
 
-        protected Attribute(){}
+        protected Attribute() { }
 
         public Attribute(Guid id, string name)
         {
@@ -29,9 +29,9 @@ namespace Boyner.Product.Domain.AggregatesModel.AttributeAggregate
 
         public void AddAttributeValues(List<string> attributeValues)
         {
-            foreach (var attributeValue in attributeValues)
+            foreach (var attributeValueName in attributeValues)
             {
-                var attribute = new AttributeValue(Guid.NewGuid(), attributeValue, this);
+                var attribute = new AttributeValue(Guid.NewGuid(), attributeValueName, this.Id);
                 AttributeValues.Add(attribute);
             }
         }

@@ -26,30 +26,29 @@ namespace Boyner.Product.Domain.AggregatesModel.ProductAggregate
 
         protected Product() { }
 
-        public Product(Guid id, string name, decimal price, Category category,Currency currency)
+        public Product(Guid id, string name, decimal price, Guid categoryId, Guid currencyId)
         {
             Check.HasValue(id, nameof(id));
             Check.NotNullOrEmpty(name, nameof(name));
-            Check.NotNull(category, nameof(category));
-            Check.NotNull(currency, nameof(currency));
+            Check.HasValue(categoryId, nameof(categoryId));
+            Check.HasValue(currencyId, nameof(currencyId));
             Check.Positive<decimal>(price, nameof(price));
 
             this.Id = id;
             this.Name = name;
-            this.CategoryId = category.Id;
-            this.Category = category;
+            this.CategoryId = categoryId;
             this.Price = price;
             this.StatusId = ProductStatus.Active.Id;
-            this.CurrencyId = currency.Id;
+            this.CurrencyId = currencyId;
 
             this.CreatedOn = DateTime.Now;
 
             this.ProductAttributes = new HashSet<ProductAttribute>();
         }
 
-        public void AddAttributeValue(AttributeAggregate.Attribute attribute, AttributeValue attributeValue)
+        public void AddAttributeValue(AttributeValue attributeValue)
         {
-            this.ProductAttributes.Add(new ProductAttribute(this, attribute, attributeValue));
+            this.ProductAttributes.Add(new ProductAttribute(Guid.NewGuid(), this.Id, attributeValue.Id));
         }
 
         public void Update(string name, Category category, decimal price)

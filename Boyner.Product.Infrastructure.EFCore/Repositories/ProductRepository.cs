@@ -9,7 +9,7 @@ namespace Boyner.Product.Infrastructure.EFCore.Repositories
         public ProductRepository(BoynerContext context) : base(context)
         { }
 
-        public async Task<int> TotalCountAsync() => await _context.Products.CountAsync(x => x.DeletedOn == null);
+        public async Task<int> TotalCountAsync() => await _context.Product.CountAsync(x => x.DeletedOn == null);
     }
 
 }

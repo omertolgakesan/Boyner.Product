@@ -18,13 +18,13 @@ namespace Boyner.Product.Domain.AggregatesModel.CategoryAggregate
 
         public Category(Guid id, string name)
         {
+            Check.HasValue(id,nameof(id));
             Check.NotNullOrEmpty(name, nameof(name));
             this.Id = id;
             this.Name = name;
 
             this.StatusId = CategoryStatus.Active.Id;
             this.CreatedOn = DateTime.Now;
-
             this.CategoryAtrributes = new HashSet<CategoryAttribute>();
             this.Products = new HashSet<ProductAggregate.Product>();
 

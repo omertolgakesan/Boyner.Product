@@ -16,10 +16,12 @@ namespace Boyner.Product.Domain.AggregatesModel.ProductAggregate
 
         protected Currency() { }
 
-        public Currency(string name, string currencyCode)
+        public Currency(Guid id, string name, string currencyCode)
         {
+            Check.HasValue(id, nameof(id));
             Check.NotNullOrEmpty(name, nameof(name));
             Check.NotNullOrEmpty(currencyCode, nameof(currencyCode));
+            Id = id;
             Name = name;
             CurrencyCode = currencyCode;
             CreatedOn = DateTime.Now;

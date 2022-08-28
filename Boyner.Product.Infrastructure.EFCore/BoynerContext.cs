@@ -1,4 +1,5 @@
-﻿using Boyner.Product.Domain.AggregatesModel.CategoryAggregate;
+﻿using Boyner.Product.Domain.AggregatesModel.AttributeAggregate;
+using Boyner.Product.Domain.AggregatesModel.CategoryAggregate;
 using Boyner.Product.Domain.AggregatesModel.ProductAggregate;
 using Boyner.Product.Domain.SharedKernel.SeedWork;
 using Boyner.Product.Infrastructure.EFCore.EntityConfigurations;
@@ -21,13 +22,14 @@ namespace Boyner.Product.Infrastructure.EFCore
         public IDbContextTransaction GetCurrentTransaction() => _currentTransaction;
         public bool HasActiveTransaction => _currentTransaction != null;
 
-        public DbSet<Domain.AggregatesModel.ProductAggregate.Product> Products { get; set; }
+        public DbSet<Domain.AggregatesModel.ProductAggregate.Product> Product { get; set; }
         public DbSet<Category> Category { get; set; }
+        public DbSet<Domain.AggregatesModel.AttributeAggregate.Attribute> Attribute { get; set; }
+        public DbSet<AttributeValue> AttributeValue { get; set; }
+        public DbSet<Currency> Currency { get; set; }
 
-        public BoynerContext()
-        {
 
-        }
+        public BoynerContext() { }
         public BoynerContext(DbContextOptions<BoynerContext> options) : base(options) { }
         public BoynerContext(DbContextOptions<BoynerContext> options, IMediator mediator) : base(options)
         {
@@ -38,12 +40,70 @@ namespace Boyner.Product.Infrastructure.EFCore
 
         protected override void OnConfiguring(DbContextOptionsBuilder builder)
         {
+            builder.EnableSensitiveDataLogging();
             builder.UseSqlServer();
             base.OnConfiguring(builder);
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            #region Database Default Values
+            var turkishLiraCurrency = new Currency(Guid.NewGuid(), "Turkish Lira", "TL");
+            modelBuilder.Entity<Currency>().HasData(turkishLiraCurrency);
+            var amerikanDollarCurrency = new Currency(Guid.NewGuid(), "American Dollar", "USD");
+            modelBuilder.Entity<Currency>().HasData(amerikanDollarCurrency);
+
+            modelBuilder.Entity<ProductStatus>().HasData(
+new ProductStatus(1, "Active"));
+            modelBuilder.Entity<ProductStatus>().HasData(
+new ProductStatus(2, "Passive"));
+
+            modelBuilder.Entity<CategoryStatus>().HasData(
+new ProductStatus(1, "Active"));
+            modelBuilder.Entity<CategoryStatus>().HasData(
+new ProductStatus(2, "Passive"));
+
+
+            var colorAttributeId = Guid.NewGuid();
+            modelBuilder.Entity<Domain.AggregatesModel.AttributeAggregate.Attribute>().HasData(new Domain.AggregatesModel.AttributeAggregate.Attribute(colorAttributeId, "Color"));
+            var whiteAttributeValueId = Guid.NewGuid();
+            modelBuilder.Entity<AttributeValue>().HasData(new AttributeValue(whiteAttributeValueId, "White", colorAttributeId));
+            modelBuilder.Entity<AttributeValue>().HasData(new AttributeValue(Guid.NewGuid(), "Black", colorAttributeId));
+            modelBuilder.Entity<AttributeValue>().HasData(new AttributeValue(Guid.NewGuid(), "Red", colorAttributeId));
+
+            var brandAttributeId = Guid.NewGuid();
+            modelBuilder.Entity<Domain.AggregatesModel.AttributeAggregate.Attribute>().HasData(new Domain.AggregatesModel.AttributeAggregate.Attribute(brandAttributeId, "Brand"));
+
+            var nikeAttributeId = Guid.NewGuid();
+            modelBuilder.Entity<AttributeValue>().HasData(new AttributeValue(nikeAttributeId, "Nike", brandAttributeId));
+            modelBuilder.Entity<AttributeValue>().HasData(new AttributeValue(Guid.NewGuid(), "Tommy Hilfiger", brandAttributeId));
+            modelBuilder.Entity<AttributeValue>().HasData(new AttributeValue(Guid.NewGuid(), "Sneckhers", brandAttributeId));
+
+            var sizeAttributeId = Guid.NewGuid();
+            modelBuilder.Entity<Domain.AggregatesModel.AttributeAggregate.Attribute>().HasData(new Domain.AggregatesModel.AttributeAggregate.Attribute(sizeAttributeId, "Size"));
+            var xlAttributeId = Guid.NewGuid();
+            modelBuilder.Entity<AttributeValue>().HasData(new AttributeValue(Guid.NewGuid(), "S", sizeAttributeId));
+            modelBuilder.Entity<AttributeValue>().HasData(new AttributeValue(Guid.NewGuid(), "M", sizeAttributeId));
+            modelBuilder.Entity<AttributeValue>().HasData(new AttributeValue(Guid.NewGuid(), "L", sizeAttributeId));
+            modelBuilder.Entity<AttributeValue>().HasData(new AttributeValue(xlAttributeId, "XL", sizeAttributeId));
+            modelBuilder.Entity<AttributeValue>().HasData(new AttributeValue(Guid.NewGuid(), "2XL", sizeAttributeId));
+
+            var clothesCategoryId = Guid.NewGuid();
+            modelBuilder.Entity<Category>().HasData(new Category(clothesCategoryId, "Clothes"));
+
+            modelBuilder.Entity<CategoryAttribute>().HasData(
+           new CategoryAttribute(Guid.NewGuid(), clothesCategoryId, colorAttributeId));
+            modelBuilder.Entity<CategoryAttribute>().HasData(
+           new CategoryAttribute(Guid.NewGuid(), clothesCategoryId, sizeAttributeId));
+
+            Guid productId = Guid.NewGuid();
+            modelBuilder.Entity<Domain.AggregatesModel.ProductAggregate.Product>().HasData(new Domain.AggregatesModel.ProductAggregate.Product(productId, "Tshirt", 150, clothesCategoryId, turkishLiraCurrency.Id));
+
+            modelBuilder.Entity<ProductAttribute>().HasData(new ProductAttribute(Guid.NewGuid(), productId, whiteAttributeValueId));
+            modelBuilder.Entity<ProductAttribute>().HasData(new ProductAttribute(Guid.NewGuid(), productId, nikeAttributeId));
+            modelBuilder.Entity<ProductAttribute>().HasData(new ProductAttribute(Guid.NewGuid(), productId, xlAttributeId));
+            #endregion
+
             modelBuilder.ApplyConfiguration(new ProductEntityConfiguration());
             modelBuilder.ApplyConfiguration(new ProductStatusEntityConfiguration());
 

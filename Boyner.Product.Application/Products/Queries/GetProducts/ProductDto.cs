@@ -27,7 +27,7 @@ namespace Boyner.Product.Application.Products.Queries.GetProducts
         {
             profile.CreateMap<Domain.AggregatesModel.ProductAggregate.Product, ProductDto>()
                 .ForMember(x => x.Price, opt => opt.MapFrom(s => $"{ s.Price.ToString("N2") } { s.Currency.CurrencyCode }"))
-                 .ForMember(d => d.ProductAttributeKey, opt => opt.MapFrom(s => s.ProductAttributes.Select(x => new KeyValuePair<string, string>(x.Attribute.Name, x.AttributeValue.Name)).ToList()));
+                 .ForMember(d => d.ProductAttributeKey, opt => opt.MapFrom(s => s.ProductAttributes.Select(x => new KeyValuePair<string, string>(x.AttributeValue.Attribute.Name, x.AttributeValue.Name)).ToList()));
         }
     }
 }

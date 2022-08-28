@@ -34,7 +34,7 @@ namespace Boyner.Product.Application.Categories.Commands
                     if (attribute == null)
                         throw new ApplicationException($"Category Attribute Error. Id: {categoryAttributeId}");
 
-                        var newCategoryAttribute = new CategoryAttribute(category.Id, attribute.Id);
+                        var newCategoryAttribute = new CategoryAttribute(Guid.NewGuid(), category.Id, attribute.Id);
                         category.AddCategoryAttribute(newCategoryAttribute);
                 }
             }

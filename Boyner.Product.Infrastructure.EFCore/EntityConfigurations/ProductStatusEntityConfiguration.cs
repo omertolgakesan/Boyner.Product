@@ -20,8 +20,6 @@ namespace Boyner.Product.Infrastructure.EFCore.EntityConfigurations
                 .HasMaxLength(100)
                 .IsRequired();
 
-            /* Seed Data */
-            //productStatusBuilder.HasData(CategoryStatus.List());
         }
     }
 }

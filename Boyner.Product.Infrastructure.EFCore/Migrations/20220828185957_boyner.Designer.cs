@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Boyner.Product.Infrastructure.EFCore.Migrations
 {
     [DbContext(typeof(BoynerContext))]
-    [Migration("20220826081632_boynerdb")]
-    partial class boynerdb
+    [Migration("20220828185957_boyner")]
+    partial class boyner
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -46,6 +46,26 @@ namespace Boyner.Product.Infrastructure.EFCore.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Attribute");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("e7c78158-611f-4342-901a-2292077956f2"),
+                            CreatedOn = new DateTime(2022, 8, 28, 21, 59, 56, 944, DateTimeKind.Local).AddTicks(4640),
+                            Name = "Color"
+                        },
+                        new
+                        {
+                            Id = new Guid("87d331c9-70cb-4d1a-943b-4febba5abdb3"),
+                            CreatedOn = new DateTime(2022, 8, 28, 21, 59, 56, 944, DateTimeKind.Local).AddTicks(4686),
+                            Name = "Brand"
+                        },
+                        new
+                        {
+                            Id = new Guid("d444a5b5-5216-4a67-9831-fbd85320aebb"),
+                            CreatedOn = new DateTime(2022, 8, 28, 21, 59, 56, 944, DateTimeKind.Local).AddTicks(4718),
+                            Name = "Size"
+                        });
                 });
 
             modelBuilder.Entity("Boyner.Product.Domain.AggregatesModel.AttributeAggregate.AttributeValue", b =>
@@ -75,6 +95,85 @@ namespace Boyner.Product.Infrastructure.EFCore.Migrations
                     b.HasIndex("AttributeId");
 
                     b.ToTable("AttributeValue");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("9e269352-04df-4d97-98cf-00acd5841680"),
+                            AttributeId = new Guid("e7c78158-611f-4342-901a-2292077956f2"),
+                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "White"
+                        },
+                        new
+                        {
+                            Id = new Guid("db278eaa-570d-4915-ad04-004b5f46e55c"),
+                            AttributeId = new Guid("e7c78158-611f-4342-901a-2292077956f2"),
+                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Black"
+                        },
+                        new
+                        {
+                            Id = new Guid("db51cb73-0317-43d4-99e4-63c008e24629"),
+                            AttributeId = new Guid("e7c78158-611f-4342-901a-2292077956f2"),
+                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Red"
+                        },
+                        new
+                        {
+                            Id = new Guid("5db83dcf-7b06-43ff-9d38-2a844635e421"),
+                            AttributeId = new Guid("87d331c9-70cb-4d1a-943b-4febba5abdb3"),
+                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Nike"
+                        },
+                        new
+                        {
+                            Id = new Guid("42d0590a-91a6-4891-8ca8-7e683302a89e"),
+                            AttributeId = new Guid("87d331c9-70cb-4d1a-943b-4febba5abdb3"),
+                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Tommy Hilfiger"
+                        },
+                        new
+                        {
+                            Id = new Guid("156c3f47-f80f-45d8-b6d0-9d8013656220"),
+                            AttributeId = new Guid("87d331c9-70cb-4d1a-943b-4febba5abdb3"),
+                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Sneckhers"
+                        },
+                        new
+                        {
+                            Id = new Guid("010f6e70-84fa-4eb0-b9df-ad6fda2234e2"),
+                            AttributeId = new Guid("d444a5b5-5216-4a67-9831-fbd85320aebb"),
+                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "S"
+                        },
+                        new
+                        {
+                            Id = new Guid("1ef0875f-d8be-4460-a84b-0f89effce12d"),
+                            AttributeId = new Guid("d444a5b5-5216-4a67-9831-fbd85320aebb"),
+                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "M"
+                        },
+                        new
+                        {
+                            Id = new Guid("45a1848b-36cf-4913-801d-6b98071599b8"),
+                            AttributeId = new Guid("d444a5b5-5216-4a67-9831-fbd85320aebb"),
+                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "L"
+                        },
+                        new
+                        {
+                            Id = new Guid("16d7c732-7393-438f-9450-9581dc1890c6"),
+                            AttributeId = new Guid("d444a5b5-5216-4a67-9831-fbd85320aebb"),
+                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "XL"
+                        },
+                        new
+                        {
+                            Id = new Guid("c0040901-984f-4bf9-8602-bc8dee723467"),
+                            AttributeId = new Guid("d444a5b5-5216-4a67-9831-fbd85320aebb"),
+                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "2XL"
+                        });
                 });
 
             modelBuilder.Entity("Boyner.Product.Domain.AggregatesModel.CategoryAggregate.Category", b =>
@@ -104,6 +203,15 @@ namespace Boyner.Product.Infrastructure.EFCore.Migrations
                     b.HasIndex("StatusId");
 
                     b.ToTable("Category", "dbo");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("3f9a23db-435c-41b8-8d1b-69ac3c4f3143"),
+                            CreatedOn = new DateTime(2022, 8, 28, 21, 59, 56, 944, DateTimeKind.Local).AddTicks(4808),
+                            Name = "Clothes",
+                            StatusId = 1
+                        });
                 });
 
             modelBuilder.Entity("Boyner.Product.Domain.AggregatesModel.CategoryAggregate.CategoryAttribute", b =>
@@ -134,6 +242,22 @@ namespace Boyner.Product.Infrastructure.EFCore.Migrations
                     b.HasIndex("CategoryId");
 
                     b.ToTable("CategoryAttribute");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("d014529a-14a7-413f-94f3-dbc5ef3b326d"),
+                            AttributeId = new Guid("e7c78158-611f-4342-901a-2292077956f2"),
+                            CategoryId = new Guid("3f9a23db-435c-41b8-8d1b-69ac3c4f3143"),
+                            CreatedOn = new DateTime(2022, 8, 28, 21, 59, 56, 944, DateTimeKind.Local).AddTicks(4835)
+                        },
+                        new
+                        {
+                            Id = new Guid("c22701fe-58c6-4bfb-9b42-9db8c0ddaea3"),
+                            AttributeId = new Guid("d444a5b5-5216-4a67-9831-fbd85320aebb"),
+                            CategoryId = new Guid("3f9a23db-435c-41b8-8d1b-69ac3c4f3143"),
+                            CreatedOn = new DateTime(2022, 8, 28, 21, 59, 56, 944, DateTimeKind.Local).AddTicks(4843)
+                        });
                 });
 
             modelBuilder.Entity("Boyner.Product.Domain.AggregatesModel.CategoryAggregate.CategoryStatus", b =>
@@ -149,6 +273,18 @@ namespace Boyner.Product.Infrastructure.EFCore.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("CategoryStatus", "dbo");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Active"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Passive"
+                        });
                 });
 
             modelBuilder.Entity("Boyner.Product.Domain.AggregatesModel.ProductAggregate.Currency", b =>
@@ -177,6 +313,22 @@ namespace Boyner.Product.Infrastructure.EFCore.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Currency");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("3a44d44f-2b39-41f3-9bf5-d92659008f13"),
+                            CreatedOn = new DateTime(2022, 8, 28, 21, 59, 56, 944, DateTimeKind.Local).AddTicks(4464),
+                            CurrencyCode = "TL",
+                            Name = "Turkish Lira"
+                        },
+                        new
+                        {
+                            Id = new Guid("36ca7562-7e7b-4e7f-bbff-fc9d410b41cd"),
+                            CreatedOn = new DateTime(2022, 8, 28, 21, 59, 56, 944, DateTimeKind.Local).AddTicks(4566),
+                            CurrencyCode = "USD",
+                            Name = "American Dollar"
+                        });
                 });
 
             modelBuilder.Entity("Boyner.Product.Domain.AggregatesModel.ProductAggregate.Product", b =>
@@ -219,15 +371,24 @@ namespace Boyner.Product.Infrastructure.EFCore.Migrations
                     b.HasIndex("StatusId");
 
                     b.ToTable("Product", "dbo");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("ad0586ca-9e8d-4394-a7b7-e7ae81ca67b6"),
+                            CategoryId = new Guid("3f9a23db-435c-41b8-8d1b-69ac3c4f3143"),
+                            CreatedOn = new DateTime(2022, 8, 28, 21, 59, 56, 944, DateTimeKind.Local).AddTicks(4890),
+                            CurrencyId = new Guid("3a44d44f-2b39-41f3-9bf5-d92659008f13"),
+                            Name = "Tshirt",
+                            Price = 150m,
+                            StatusId = 1
+                        });
                 });
 
             modelBuilder.Entity("Boyner.Product.Domain.AggregatesModel.ProductAggregate.ProductAttribute", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("AttributeId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("AttributeValueId")
@@ -247,13 +408,34 @@ namespace Boyner.Product.Infrastructure.EFCore.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AttributeId");
-
                     b.HasIndex("AttributeValueId");
 
                     b.HasIndex("ProductId");
 
                     b.ToTable("ProductAttribute");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("4be4d5d0-876e-4ab2-ba4a-93f689ea1c69"),
+                            AttributeValueId = new Guid("9e269352-04df-4d97-98cf-00acd5841680"),
+                            CreatedOn = new DateTime(2022, 8, 28, 21, 59, 56, 944, DateTimeKind.Local).AddTicks(4909),
+                            ProductId = new Guid("ad0586ca-9e8d-4394-a7b7-e7ae81ca67b6")
+                        },
+                        new
+                        {
+                            Id = new Guid("a0887d7d-c466-4da2-9a5d-f21701d16526"),
+                            AttributeValueId = new Guid("5db83dcf-7b06-43ff-9d38-2a844635e421"),
+                            CreatedOn = new DateTime(2022, 8, 28, 21, 59, 56, 944, DateTimeKind.Local).AddTicks(4918),
+                            ProductId = new Guid("ad0586ca-9e8d-4394-a7b7-e7ae81ca67b6")
+                        },
+                        new
+                        {
+                            Id = new Guid("4d6506c9-489b-4104-aefc-2f9ff0edd9d0"),
+                            AttributeValueId = new Guid("16d7c732-7393-438f-9450-9581dc1890c6"),
+                            CreatedOn = new DateTime(2022, 8, 28, 21, 59, 56, 944, DateTimeKind.Local).AddTicks(4925),
+                            ProductId = new Guid("ad0586ca-9e8d-4394-a7b7-e7ae81ca67b6")
+                        });
                 });
 
             modelBuilder.Entity("Boyner.Product.Domain.AggregatesModel.ProductAggregate.ProductStatus", b =>
@@ -269,6 +451,18 @@ namespace Boyner.Product.Infrastructure.EFCore.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("ProductStatus", "dbo");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Active"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Passive"
+                        });
                 });
 
             modelBuilder.Entity("Boyner.Product.Domain.AggregatesModel.AttributeAggregate.AttributeValue", b =>
@@ -341,12 +535,6 @@ namespace Boyner.Product.Infrastructure.EFCore.Migrations
 
             modelBuilder.Entity("Boyner.Product.Domain.AggregatesModel.ProductAggregate.ProductAttribute", b =>
                 {
-                    b.HasOne("Boyner.Product.Domain.AggregatesModel.AttributeAggregate.Attribute", "Attribute")
-                        .WithMany()
-                        .HasForeignKey("AttributeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("Boyner.Product.Domain.AggregatesModel.AttributeAggregate.AttributeValue", "AttributeValue")
                         .WithMany()
                         .HasForeignKey("AttributeValueId")
@@ -358,8 +546,6 @@ namespace Boyner.Product.Infrastructure.EFCore.Migrations
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Attribute");
 
                     b.Navigation("AttributeValue");
 

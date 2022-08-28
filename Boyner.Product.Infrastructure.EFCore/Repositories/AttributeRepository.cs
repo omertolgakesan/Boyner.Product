@@ -9,7 +9,7 @@ namespace Boyner.Product.Infrastructure.EFCore.Repositories
         public AttributeRepository(BoynerContext context) : base(context)
         { }
 
-        public async Task<int> TotalCountAsync() => await _context.Category.CountAsync(x => x.DeletedOn == null);
+        public async Task<int> TotalCountAsync() => await _context.Attribute.CountAsync(x => x.DeletedOn == null);
     }
 
 }

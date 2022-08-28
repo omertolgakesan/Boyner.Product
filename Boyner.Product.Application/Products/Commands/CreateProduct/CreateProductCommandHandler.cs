@@ -49,7 +49,7 @@ namespace Boyner.Product.Application.Products.Commands.CreateProduct
                 throw new ApplicationException($"{request.CurrencyCode} not found.");
             }
 
-            Domain.AggregatesModel.ProductAggregate.Product product = new Domain.AggregatesModel.ProductAggregate.Product(Guid.NewGuid(), request.Name, request.Price, category, currency);
+            Domain.AggregatesModel.ProductAggregate.Product product = new Domain.AggregatesModel.ProductAggregate.Product(Guid.NewGuid(), request.Name, request.Price, category.Id, currency.Id);
 
             await _productRepository.AddAsync(product, cancellationToken);
 
@@ -75,7 +75,7 @@ namespace Boyner.Product.Application.Products.Commands.CreateProduct
 
                 foreach (var attributeValue in attributeValueList)
                 {
-                    product.AddAttributeValue(attributeValue.Attribute, attributeValue);
+                    product.AddAttributeValue(attributeValue);
                 }
             }
 

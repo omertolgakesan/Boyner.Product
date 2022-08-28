@@ -10,7 +10,7 @@ namespace Boyner.Product.Infrastructure.EFCore.Repositories
         public CurrencyRepository(BoynerContext context) : base(context)
         { }
 
-        public async Task<int> TotalCountAsync() => await _context.Category.CountAsync(x => x.DeletedOn == null);
+        public async Task<int> TotalCountAsync() => await _context.Currency.CountAsync(x => x.DeletedOn == null);
     }
 
 }
