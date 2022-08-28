@@ -30,6 +30,7 @@ namespace Boyner.Product.Domain.AggregatesModel.ProductAggregate
             Check.HasValue(id, nameof(id));
             Check.NotNullOrEmpty(name, nameof(name));
             Check.NotNull(category, nameof(category));
+            Check.Positive<decimal>(price, nameof(price));
 
             this.Id = id;
             this.Name = name;
